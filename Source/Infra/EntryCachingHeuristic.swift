@@ -12,6 +12,18 @@ struct CachedEntry {
     let view: EKEntryView
     let presentInsideKeyWindow: Bool
     let rollbackWindow: SwiftEntryKit.RollbackWindow
+
+    init(view: EKEntryView, presentInsideKeyWindow: Bool = false, rollbackWindow: SwiftEntryKit.RollbackWindow) {
+        self.view = view
+        self.presentInsideKeyWindow = presentInsideKeyWindow
+        self.rollbackWindow = rollbackWindow
+    }
+    
+    init(view: EKEntryView) {
+        self.view = view
+        self.presentInsideKeyWindow = false
+        self.rollbackWindow = .main
+    }
 }
 
 protocol EntryCachingHeuristic: AnyObject {

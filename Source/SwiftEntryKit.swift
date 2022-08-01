@@ -56,16 +56,7 @@ public final class SwiftEntryKit {
     public class var window: UIWindow? {
         return EKWindowProvider.shared.entryWindow
     }
-    
-    /**
-     Returns true if **any** entry is currently displayed.
-     - Not thread safe - should be called from the main queue only in order to receive a reliable result.
-     - Convenience computed variable. Using it is the same as invoking **isCurrentlyDisplaying() -> Bool** (witohut the name of the entry).
-     */
-    public class var isCurrentlyDisplaying: Bool {
-        return isCurrentlyDisplaying()
-    }
-    
+        
     /**
      Returns true if an entry with a given name is currently displayed.
      - Not thread safe - should be called from the main queue only in order to receive a reliable result.
@@ -78,12 +69,33 @@ public final class SwiftEntryKit {
     }
     
     /**
+     Returns true if an entry with a given name is currently displayed on a view.
+     - Not thread safe - should be called from the main queue only in order to receive a reliable result.
+     - If invoked with *name* = *nil* or without the parameter value, it will return *true* if **any** entry is currently displayed.
+     - Returns a *false* value for currently enqueued entries.
+     - parameter name: The name of the entry. Its default value is *nil*.
+     - parameter provider: The entry view provider.
+     */
+    public class func isCurrentlyDisplaying(entryNamed name: String? = nil, from provider: EKViewProvider) -> Bool {
+        return provider.isCurrentlyDisplaying(entryNamed: name)
+    }
+    
+    /**
      Returns true if **any** entry is currently enqueued and waiting to be displayed.
      - Not thread safe - should be called from the main queue only in order to receive a reliable result.
      - Convenience computed variable. Using it is the same as invoking **~queueContains() -> Bool** (witohut the name of the entry)
      */
-    public class var isQueueEmpty: Bool {
+    public class func isQueueEmpty() -> Bool {
         return !queueContains()
+    }
+    
+    /**
+     Returns true if **any** entry is currently enqueued and waiting to be displayed on a view.
+     - Not thread safe - should be called from the main queue only in order to receive a reliable result.
+     - Convenience computed variable. Using it is the same as invoking **~queueContains() -> Bool** (witohut the name of the entry)
+     */
+    public class func isQueueEmpty(from provider: EKViewProvider) -> Bool {
+        return !queueContains(from: provider)
     }
     
     /**
@@ -94,6 +106,17 @@ public final class SwiftEntryKit {
      */
     public class func queueContains(entryNamed name: String? = nil) -> Bool {
         return EKWindowProvider.shared.queueContains(entryNamed: name)
+    }
+    
+    /**
+     Returns true if an entry with a given name is currently enqueued and waiting to be displayed on a view.
+     - Not thread safe - should be called from the main queue only in order to receive a reliable result.
+     - If invoked with *name* = *nil* or without the parameter value, it will return *true* if **any** entry is currently displayed, meaning, the queue is not currently empty.
+     - parameter name: The name of the entry. Its default value is *nil*.
+     - parameter provider: The entry view provider.
+     */
+    public class func queueContains(entryNamed name: String? = nil, from provider: EKViewProvider) -> Bool {
+        return provider.queueContains(entryNamed: name)
     }
     
     /**
@@ -108,6 +131,24 @@ public final class SwiftEntryKit {
     public class func display(entry view: UIView, using attributes: EKAttributes, presentInsideKeyWindow: Bool = false, rollbackWindow: RollbackWindow = .main) {
         DispatchQueue.main.async {
             EKWindowProvider.shared.display(view: view, using: attributes, presentInsideKeyWindow: presentInsideKeyWindow, rollbackWindow: rollbackWindow)
+        }
+    }
+    
+    /**
+     Displays a given entry view using an attributes struct.
+     - A thread-safe method - Can be invokes from any thread
+     - A class method - Should be called on the class
+     - parameter view: Custom view that is to be displayed
+     - parameter attributes: Display properties
+     - parameter presentView: Display on the view
+     */
+    public class func display(entry view: UIView, using attributes: EKAttributes, presentView: UIView) {
+        DispatchQueue.main.async {
+            let provider = EKViewProvider(presentView: presentView)
+            let entryView = EKEntryView(newEntry: .init(view: view, attributes: attributes))
+            provider.appendToPresentView()
+            view.provider = provider
+            provider.display(entryView: entryView, using: attributes)
         }
     }
     
@@ -127,6 +168,25 @@ public final class SwiftEntryKit {
     }
     
     /**
+     Displays a given entry view controller using an attributes struct.
+     - A thread-safe method - Can be invokes from any thread
+     - A class method - Should be called on the class
+     - parameter viewController: Custom viewController that is to be displayed
+     - parameter attributes: Display properties
+     - parameter presentInsideKeyWindow: Indicates whether the entry window should become the key window.
+     - parameter presentView: Display on the view
+     */
+    public class func display(entry viewController: UIViewController, using attributes: EKAttributes, presentView: UIView) {
+        DispatchQueue.main.async {
+            let provider = EKViewProvider(presentView: presentView)
+            provider.appendToPresentView()
+            viewController.view.provider = provider
+            let entryView = EKEntryView(newEntry: .init(viewController: viewController, attributes: attributes))
+            provider.display(entryView: entryView, using: attributes)
+        }
+    }
+    
+    /**
      ALPHA FEATURE: Transform the previous entry to the current one using the previous attributes struct.
      - A thread-safe method - Can be invoked from any thread.
      - A class method - Should be called on the class.
@@ -136,6 +196,20 @@ public final class SwiftEntryKit {
     public class func transform(to view: UIView) {
         DispatchQueue.main.async {
             EKWindowProvider.shared.transform(to: view)
+        }
+    }
+    
+    /**
+     ALPHA FEATURE: Transform the previous entry to the current one using the previous attributes struct.
+     - A thread-safe method - Can be invoked from any thread.
+     - A class method - Should be called on the class.
+     - This feature hasn't been fully tested. Use with caution.
+     - parameter view: Custom view that is to be displayed instead of the currently displayed entry
+     - parameter provider: The entry view provider.
+     */
+    public class func transform(to view: UIView, from provider: EKViewProvider?) {
+        DispatchQueue.main.async {
+            provider?.transform(to: view)
         }
     }
     
@@ -153,6 +227,34 @@ public final class SwiftEntryKit {
     }
     
     /**
+     Dismisses the currently presented entry and removes the presented window instance after the exit animation is concluded.
+     - A thread-safe method - Can be invoked from any thread.
+     - A class method - Should be called on the class.
+     - parameter provider: The entry view provider.
+     - parameter descriptor: A descriptor for the entries that are to be dismissed. The default value is *.displayed*.
+     - parameter completion: A completion handler that is to be called right after the entry is dismissed (After the animation is concluded).
+     */
+    public class func dismiss(form provider: EKViewProvider, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
+        DispatchQueue.main.async {
+            provider.dismiss(descriptor, with: completion)
+        }
+    }
+    
+    /**
+     Dismisses the currently presented entry and removes the presented view instance after the exit animation is concluded.
+     - A thread-safe method - Can be invoked from any thread.
+     - A class method - Should be called on the class.
+     - parameter presentView: Display on the view.
+     - parameter descriptor: A descriptor for the entries that are to be dismissed. The default value is *.displayed*.
+     - parameter completion: A completion handler that is to be called right after the entry is dismissed (After the animation is concluded).
+     */
+    public class func dismiss(form presentView: UIView, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed) {
+        DispatchQueue.main.async {
+            presentView.providers.forEach({ $0.dismiss(descriptor, with: nil) })
+        }
+    }
+    
+    /**
      Layout the view hierarchy that is rooted in the window.
      - In case you use complex animations, you can call it to refresh the AutoLayout mechanism on the entire view hierarchy.
      - A thread-safe method - Can be invoked from any thread.
@@ -166,5 +268,38 @@ public final class SwiftEntryKit {
                 EKWindowProvider.shared.layoutIfNeeded()
             }
         }
+    }
+    
+    /**
+     Layout the view hierarchy that is rooted in the view.
+     - In case you use complex animations, you can call it to refresh the AutoLayout mechanism on the entire view hierarchy.
+     - A thread-safe method - Can be invoked from any thread.
+     - A class method - Should be called on the class.
+     - parameter provider: The entry view provider.
+     */
+    public class func layoutIfNeeded(from provider: EKViewProvider) {
+        if Thread.isMainThread {
+            provider.layoutIfNeeded()
+        } else {
+            DispatchQueue.main.async {
+                provider.layoutIfNeeded()
+            }
+        }
+    }
+
+    /**
+     Get all providers from presentView.
+     - parameter presentView: The present view.
+     */
+    public class func providers(from presentView: UIView) -> [EKViewProvider] {
+        return presentView.providers
+    }
+    
+    public class func provider(from viewController: UIViewController) -> EKViewProvider? {
+        return viewController.view.provider
+    }
+    
+    public class func provider(from view: UIView) -> EKViewProvider? {
+        return view.provider
     }
 }

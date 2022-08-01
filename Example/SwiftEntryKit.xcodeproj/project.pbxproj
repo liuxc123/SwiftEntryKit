@@ -124,6 +124,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		C207011E12B68340B41AED68 /* Pods_SwiftEntryKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7287A554A48DB0976C7AA96F /* Pods_SwiftEntryKitTests.framework */; };
 		ED3C4B61645C539D4E1B2C91 /* Pods_SwiftEntryKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B9C8169640826800BA255C /* Pods_SwiftEntryKitDemo.framework */; };
+		F12CC20F2897A61700639469 /* EKViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12CC20E2897A61700639469 /* EKViewProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,6 +290,7 @@
 		7287A554A48DB0976C7AA96F /* Pods_SwiftEntryKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftEntryKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFB554B7EC0872395B9099A /* Pods-SwiftEntryKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftEntryKitDemo.release.xcconfig"; path = "Target Support Files/Pods-SwiftEntryKitDemo/Pods-SwiftEntryKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		EFEC60E1244126F18ABBB375 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F12CC20E2897A61700639469 /* EKViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKViewProvider.swift; sourceTree = "<group>"; };
 		F1F450C1E75BEC09B67F526C /* SwiftEntryKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftEntryKit.podspec; path = ../SwiftEntryKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
@@ -399,15 +401,16 @@
 		14B48B1820B81C9700CE3EF4 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
-				14F3FD85213A6ED900CA3010 /* EntryCachingHeuristic.swift */,
-				14B48B1B20B81C9700CE3EF4 /* EKWindowProvider.swift */,
-				14B48B1C20B81C9700CE3EF4 /* EKWindow.swift */,
-				14B48B1920B81C9700CE3EF4 /* EKRootViewController.swift */,
-				14B48B1A20B81C9700CE3EF4 /* EKEntryView.swift */,
 				14B48B1D20B81C9700CE3EF4 /* EKBackgroundView.swift */,
-				14B48B1E20B81C9700CE3EF4 /* EKWrapperView.swift */,
 				14B48B1F20B81C9700CE3EF4 /* EKContentView.swift */,
+				14B48B1A20B81C9700CE3EF4 /* EKEntryView.swift */,
+				14B48B1920B81C9700CE3EF4 /* EKRootViewController.swift */,
 				14B48B2020B81C9700CE3EF4 /* EKStyleView.swift */,
+				F12CC20E2897A61700639469 /* EKViewProvider.swift */,
+				14B48B1C20B81C9700CE3EF4 /* EKWindow.swift */,
+				14B48B1B20B81C9700CE3EF4 /* EKWindowProvider.swift */,
+				14B48B1E20B81C9700CE3EF4 /* EKWrapperView.swift */,
+				14F3FD85213A6ED900CA3010 /* EntryCachingHeuristic.swift */,
 			);
 			path = Infra;
 			sourceTree = "<group>";
@@ -702,9 +705,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 143C6A2920B54E4A00F7DD89 /* Build configuration list for PBXNativeTarget "SwiftEntryKit" */;
 			buildPhases = (
+				143C6A1B20B54E4A00F7DD89 /* Headers */,
 				143C6A1920B54E4A00F7DD89 /* Sources */,
 				143C6A1A20B54E4A00F7DD89 /* Frameworks */,
-				143C6A1B20B54E4A00F7DD89 /* Headers */,
 				143C6A1C20B54E4A00F7DD89 /* Resources */,
 			);
 			buildRules = (
@@ -945,6 +948,7 @@
 				14B48B6220B81C9700CE3EF4 /* HapticFeedbackGenerator.swift in Sources */,
 				14B48B8420B81C9700CE3EF4 /* EKFormMessageView.swift in Sources */,
 				14B48B7D20B81C9700CE3EF4 /* EKAlertMessageView.swift in Sources */,
+				F12CC20F2897A61700639469 /* EKViewProvider.swift in Sources */,
 				14B48B6B20B81C9700CE3EF4 /* EKAttributes+Position.swift in Sources */,
 				14B48B7E20B81C9700CE3EF4 /* EKSimpleMessageView.swift in Sources */,
 				14B48B6120B81C9700CE3EF4 /* GradientView.swift in Sources */,

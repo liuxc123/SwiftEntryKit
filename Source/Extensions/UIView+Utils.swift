@@ -147,3 +147,18 @@ extension UITextField {
         }
     }
 }
+
+extension UIView {
+    struct EKAssociatedKey {
+        static var ek_view_provider_key: Void?
+        static var ek_view_providers_key: Void?
+    }
+    var provider: EKViewProvider? {
+        set { objc_setAssociatedObject(self, &EKAssociatedKey.ek_view_provider_key, newValue, .OBJC_ASSOCIATION_ASSIGN) }
+        get { objc_getAssociatedObject(self, &EKAssociatedKey.ek_view_provider_key) as? EKViewProvider }
+    }
+    var providers: [EKViewProvider] {
+        set { objc_setAssociatedObject(self, &EKAssociatedKey.ek_view_providers_key, newValue, .OBJC_ASSOCIATION_RETAIN) }
+        get { objc_getAssociatedObject(self, &EKAssociatedKey.ek_view_providers_key) as? [EKViewProvider] ?? [] }
+    }
+}

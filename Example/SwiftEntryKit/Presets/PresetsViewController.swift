@@ -784,18 +784,24 @@ class PresetsViewController: UIViewController {
     private func showNavigationController(with attributes: EKAttributes) {
         let viewController = ContactsViewController()
         let navigationController = ExampleNavigationViewController(rootViewController: viewController)
-        SwiftEntryKit.display(entry: navigationController, using: attributes)
+//        SwiftEntryKit.display(entry: navigationController, using: attributes)
+        
+        SwiftEntryKit.display(entry: navigationController, using: attributes, presentView: self.view)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print(SwiftEntryKit.provider(from: navigationController))
+        }
     }
     
     // Bumps a custom nib originated view
     private func showCustomNibView(attributes: EKAttributes) {
-        SwiftEntryKit.display(entry: NibExampleView(), using: attributes)
+        SwiftEntryKit.display(entry: NibExampleView(), using: attributes, presentView: self.view)
     }
     
     // Bumps a custom view controller that is using a view from nib
     private func showCustomViewController(attributes: EKAttributes) {
         let viewController = ExampleViewController(with: NibExampleView())
-        SwiftEntryKit.display(entry: viewController, using: attributes)
+        SwiftEntryKit.display(entry: viewController, using: attributes, presentView: self.view)
     }
     
     // Sign in form
