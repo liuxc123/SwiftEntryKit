@@ -230,13 +230,27 @@ public final class SwiftEntryKit {
      Dismisses the currently presented entry and removes the presented window instance after the exit animation is concluded.
      - A thread-safe method - Can be invoked from any thread.
      - A class method - Should be called on the class.
-     - parameter provider: The entry view provider.
+     - parameter view: The entry view.
      - parameter descriptor: A descriptor for the entries that are to be dismissed. The default value is *.displayed*.
      - parameter completion: A completion handler that is to be called right after the entry is dismissed (After the animation is concluded).
      */
-    public class func dismiss(form provider: EKViewProvider, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
+    public class func dismiss(entry view: UIView, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
         DispatchQueue.main.async {
-            provider.dismiss(descriptor, with: completion)
+            view.provider?.dismiss(descriptor, with: completion)
+        }
+    }
+    
+    /**
+     Dismisses the currently presented entry and removes the presented window instance after the exit animation is concluded.
+     - A thread-safe method - Can be invoked from any thread.
+     - A class method - Should be called on the class.
+     - parameter viewController: The entry view controller.
+     - parameter descriptor: A descriptor for the entries that are to be dismissed. The default value is *.displayed*.
+     - parameter completion: A completion handler that is to be called right after the entry is dismissed (After the animation is concluded).
+     */
+    public class func dismiss(entry viewController: UIViewController, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
+        DispatchQueue.main.async {
+            viewController.view.provider?.dismiss(descriptor, with: completion)
         }
     }
     
@@ -275,14 +289,31 @@ public final class SwiftEntryKit {
      - In case you use complex animations, you can call it to refresh the AutoLayout mechanism on the entire view hierarchy.
      - A thread-safe method - Can be invoked from any thread.
      - A class method - Should be called on the class.
-     - parameter provider: The entry view provider.
+     - parameter view: The entry view.
      */
-    public class func layoutIfNeeded(from provider: EKViewProvider) {
+    public class func layoutIfNeeded(entry view: UIView) {
         if Thread.isMainThread {
-            provider.layoutIfNeeded()
+            view.provider?.layoutIfNeeded()
         } else {
             DispatchQueue.main.async {
-                provider.layoutIfNeeded()
+                view.provider?.layoutIfNeeded()
+            }
+        }
+    }
+    
+    /**
+     Layout the view hierarchy that is rooted in the view.
+     - In case you use complex animations, you can call it to refresh the AutoLayout mechanism on the entire view hierarchy.
+     - A thread-safe method - Can be invoked from any thread.
+     - A class method - Should be called on the class.
+     - parameter viewController: The entry view controller.
+     */
+    public class func layoutIfNeeded(entry viewController: UIViewController) {
+        if Thread.isMainThread {
+            viewController.view.provider?.layoutIfNeeded()
+        } else {
+            DispatchQueue.main.async {
+                viewController.view.provider?.layoutIfNeeded()
             }
         }
     }
@@ -295,10 +326,18 @@ public final class SwiftEntryKit {
         return presentView.providers
     }
     
+    /**
+     Get provider from entry view.
+     - parameter viewController: The entry view controller.
+     */
     public class func provider(from viewController: UIViewController) -> EKViewProvider? {
         return viewController.view.provider
     }
     
+    /**
+     Get provider from entry view.
+     - parameter view: The entry view.
+     */
     public class func provider(from view: UIView) -> EKViewProvider? {
         return view.provider
     }
