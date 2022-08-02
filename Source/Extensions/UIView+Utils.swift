@@ -150,15 +150,27 @@ extension UITextField {
 
 extension UIView {
     struct EKAssociatedKey {
-        static var ek_view_provider_key: Void?
         static var ek_view_providers_key: Void?
+        static var ek_main_view_provider_key: Void?
+        static var ek_entry_view_provider_key: Void?
     }
-    var provider: EKViewProvider? {
-        set { objc_setAssociatedObject(self, &EKAssociatedKey.ek_view_provider_key, newValue, .OBJC_ASSOCIATION_ASSIGN) }
-        get { objc_getAssociatedObject(self, &EKAssociatedKey.ek_view_provider_key) as? EKViewProvider }
-    }
-    var providers: [EKViewProvider] {
+    var viewProviders: [EKViewProvider] {
         set { objc_setAssociatedObject(self, &EKAssociatedKey.ek_view_providers_key, newValue, .OBJC_ASSOCIATION_RETAIN) }
         get { objc_getAssociatedObject(self, &EKAssociatedKey.ek_view_providers_key) as? [EKViewProvider] ?? [] }
+    }
+    var mainProvider: EKViewProvider {
+        set { objc_setAssociatedObject(self, &EKAssociatedKey.ek_main_view_provider_key, newValue, .OBJC_ASSOCIATION_RETAIN) }
+        get {
+            var provider = objc_getAssociatedObject(self, &EKAssociatedKey.ek_main_view_provider_key) as? EKViewProvider
+            if provider == nil {
+                provider = EKViewProvider(presentView: self)
+                objc_setAssociatedObject(self, &EKAssociatedKey.ek_main_view_provider_key, provider, .OBJC_ASSOCIATION_RETAIN)
+            }
+            return provider!
+        }
+    }
+    var entryProvider: EKViewProvider? {
+        set { objc_setAssociatedObject(self, &EKAssociatedKey.ek_entry_view_provider_key, newValue, .OBJC_ASSOCIATION_ASSIGN) }
+        get { objc_getAssociatedObject(self, &EKAssociatedKey.ek_entry_view_provider_key) as? EKViewProvider }
     }
 }

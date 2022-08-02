@@ -99,7 +99,7 @@ public final class EKViewProvider: NSObject, EntryPresenterDelegate {
         entryVC?.view.removeFromSuperview()
         entryVC = nil
         entryView = nil
-        presentView.providers.removeAll { [weak self] (provider) -> Bool in
+        presentView.viewProviders.removeAll { [weak self] (provider) -> Bool in
             guard let self = self else { return false }
             return provider == self
         }
@@ -107,8 +107,8 @@ public final class EKViewProvider: NSObject, EntryPresenterDelegate {
     
     /** Add to presentView */
     func appendToPresentView() {
-        if !self.presentView.providers.contains(self) {
-            self.presentView.providers.append(self)
+        if !self.presentView.viewProviders.contains(self) {
+            self.presentView.viewProviders.append(self)
         }
     }
     

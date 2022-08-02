@@ -951,6 +951,7 @@ struct PresetsDataSource {
         
         // Preset I
         attributes = .bottomFloat
+        attributes.precedence = .enqueue(priority: .normal)
         attributes.displayMode = displayMode
         attributes.displayDuration = .infinity
         attributes.screenBackground = .color(color: .dimmedLightBackground)
@@ -998,6 +999,7 @@ struct PresetsDataSource {
         
         // Preset II
         attributes = .bottomFloat
+        attributes.precedence = .enqueue(priority: .normal)
         attributes.displayMode = displayMode
         attributes.hapticFeedbackType = .success
         attributes.displayDuration = 3
@@ -1076,6 +1078,7 @@ struct PresetsDataSource {
         
         // Preset III
         attributes = .bottomFloat
+        attributes.precedence = .enqueue(priority: .normal)
         attributes.displayMode = displayMode
         attributes.hapticFeedbackType = .success
         attributes.displayDuration = 3

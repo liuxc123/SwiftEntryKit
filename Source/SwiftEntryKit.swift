@@ -141,13 +141,19 @@ public final class SwiftEntryKit {
      - parameter view: Custom view that is to be displayed
      - parameter attributes: Display properties
      - parameter presentView: Display on the view
+     - parameter presentInMainProivder: Display on the main provider.
      */
-    public class func display(entry view: UIView, using attributes: EKAttributes, presentView: UIView) {
+    public class func display(entry view: UIView, using attributes: EKAttributes, presentView: UIView, presentInMainProivder: Bool = true) {
         DispatchQueue.main.async {
-            let provider = EKViewProvider(presentView: presentView)
+            var provider: EKViewProvider!
+            if presentInMainProivder {
+                provider = presentView.mainProvider
+            } else {
+                provider = EKViewProvider(presentView: presentView)
+                provider.appendToPresentView()
+            }
+            view.entryProvider = provider
             let entryView = EKEntryView(newEntry: .init(view: view, attributes: attributes))
-            provider.appendToPresentView()
-            view.provider = provider
             provider.display(entryView: entryView, using: attributes)
         }
     }
@@ -174,13 +180,19 @@ public final class SwiftEntryKit {
      - parameter viewController: Custom viewController that is to be displayed
      - parameter attributes: Display properties
      - parameter presentInsideKeyWindow: Indicates whether the entry window should become the key window.
-     - parameter presentView: Display on the view
+     - parameter presentView: Display on the view.
+     - parameter presentInMainProivder: Display on the main provider.
      */
-    public class func display(entry viewController: UIViewController, using attributes: EKAttributes, presentView: UIView) {
+    public class func display(entry viewController: UIViewController, using attributes: EKAttributes, presentView: UIView, presentInMainProivder: Bool = true) {
         DispatchQueue.main.async {
-            let provider = EKViewProvider(presentView: presentView)
-            provider.appendToPresentView()
-            viewController.view.provider = provider
+            var provider: EKViewProvider!
+            if presentInMainProivder {
+                provider = presentView.mainProvider
+            } else {
+                provider = EKViewProvider(presentView: presentView)
+                provider.appendToPresentView()
+            }
+            viewController.view.entryProvider = provider
             let entryView = EKEntryView(newEntry: .init(viewController: viewController, attributes: attributes))
             provider.display(entryView: entryView, using: attributes)
         }
@@ -234,9 +246,9 @@ public final class SwiftEntryKit {
      - parameter descriptor: A descriptor for the entries that are to be dismissed. The default value is *.displayed*.
      - parameter completion: A completion handler that is to be called right after the entry is dismissed (After the animation is concluded).
      */
-    public class func dismiss(entry view: UIView, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
+    public class func dismiss(entry view: UIView?, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
         DispatchQueue.main.async {
-            view.provider?.dismiss(descriptor, with: completion)
+            view?.entryProvider?.dismiss(descriptor, with: completion)
         }
     }
     
@@ -248,9 +260,9 @@ public final class SwiftEntryKit {
      - parameter descriptor: A descriptor for the entries that are to be dismissed. The default value is *.displayed*.
      - parameter completion: A completion handler that is to be called right after the entry is dismissed (After the animation is concluded).
      */
-    public class func dismiss(entry viewController: UIViewController, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
+    public class func dismiss(entry viewController: UIViewController?, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
         DispatchQueue.main.async {
-            viewController.view.provider?.dismiss(descriptor, with: completion)
+            viewController?.view.entryProvider?.dismiss(descriptor, with: completion)
         }
     }
     
@@ -262,9 +274,9 @@ public final class SwiftEntryKit {
      - parameter descriptor: A descriptor for the entries that are to be dismissed. The default value is *.displayed*.
      - parameter completion: A completion handler that is to be called right after the entry is dismissed (After the animation is concluded).
      */
-    public class func dismiss(form presentView: UIView, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed) {
+    public class func dismiss(form presentView: UIView?, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed) {
         DispatchQueue.main.async {
-            presentView.providers.forEach({ $0.dismiss(descriptor, with: nil) })
+            presentView?.viewProviders.forEach({ $0.dismiss(descriptor, with: nil) })
         }
     }
     
@@ -291,12 +303,12 @@ public final class SwiftEntryKit {
      - A class method - Should be called on the class.
      - parameter view: The entry view.
      */
-    public class func layoutIfNeeded(entry view: UIView) {
+    public class func layoutIfNeeded(entry view: UIView?) {
         if Thread.isMainThread {
-            view.provider?.layoutIfNeeded()
+            view?.entryProvider?.layoutIfNeeded()
         } else {
             DispatchQueue.main.async {
-                view.provider?.layoutIfNeeded()
+                view?.entryProvider?.layoutIfNeeded()
             }
         }
     }
@@ -308,12 +320,12 @@ public final class SwiftEntryKit {
      - A class method - Should be called on the class.
      - parameter viewController: The entry view controller.
      */
-    public class func layoutIfNeeded(entry viewController: UIViewController) {
+    public class func layoutIfNeeded(entry viewController: UIViewController?) {
         if Thread.isMainThread {
-            viewController.view.provider?.layoutIfNeeded()
+            viewController?.view.entryProvider?.layoutIfNeeded()
         } else {
             DispatchQueue.main.async {
-                viewController.view.provider?.layoutIfNeeded()
+                viewController?.view.entryProvider?.layoutIfNeeded()
             }
         }
     }
@@ -322,23 +334,23 @@ public final class SwiftEntryKit {
      Get all providers from presentView.
      - parameter presentView: The present view.
      */
-    public class func providers(from presentView: UIView) -> [EKViewProvider] {
-        return presentView.providers
+    public class func providers(from presentView: UIView?) -> [EKViewProvider] {
+        return presentView?.viewProviders ?? []
     }
     
     /**
      Get provider from entry view.
      - parameter viewController: The entry view controller.
      */
-    public class func provider(from viewController: UIViewController) -> EKViewProvider? {
-        return viewController.view.provider
+    public class func provider(from viewController: UIViewController?) -> EKViewProvider? {
+        return viewController?.view.entryProvider
     }
     
     /**
      Get provider from entry view.
      - parameter view: The entry view.
      */
-    public class func provider(from view: UIView) -> EKViewProvider? {
-        return view.provider
+    public class func provider(from view: UIView?) -> EKViewProvider? {
+        return view?.entryProvider
     }
 }
