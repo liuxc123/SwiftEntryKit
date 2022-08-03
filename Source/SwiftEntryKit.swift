@@ -248,7 +248,11 @@ public final class SwiftEntryKit {
      */
     public class func dismiss(entry view: UIView?, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
         DispatchQueue.main.async {
-            view?.entryProvider?.dismiss(descriptor, with: completion)
+            if let provider = view?.entryProvider {
+                provider.dismiss(descriptor, with: completion)
+            } else {
+                dismiss(descriptor, with: completion)
+            }
         }
     }
     
@@ -262,7 +266,11 @@ public final class SwiftEntryKit {
      */
     public class func dismiss(entry viewController: UIViewController?, descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil) {
         DispatchQueue.main.async {
-            viewController?.view.entryProvider?.dismiss(descriptor, with: completion)
+            if let provider = viewController?.view.entryProvider {
+                provider.dismiss(descriptor, with: completion)
+            } else {
+                dismiss(descriptor, with: completion)
+            }
         }
     }
     
