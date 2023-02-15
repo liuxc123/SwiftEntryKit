@@ -134,14 +134,14 @@
 		56FFD994FB403BA7DE024B52120894C2 /* EKWrapperView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKWrapperView.swift; sourceTree = "<group>"; };
 		57B80D470201DD94A4BB69F5CBA14801 /* EKProcessingNoteMessageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKProcessingNoteMessageView.swift; sourceTree = "<group>"; };
 		591EE3E75D6F6DDF11DED8A8790D7590 /* SwiftEntryKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftEntryKit-prefix.pch"; sourceTree = "<group>"; };
-		5DC134E9E6F89E7657FA8FC26D4767BE /* SwiftEntryKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwiftEntryKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5DC134E9E6F89E7657FA8FC26D4767BE /* SwiftEntryKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SwiftEntryKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5E6A2B5B12F375F2746D929FB1B134AA /* UIColor+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		5F616092C3992FA174386C7077E35178 /* EKAttributes+Position.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "EKAttributes+Position.swift"; sourceTree = "<group>"; };
 		5FF0746699E8C9E2C832D53B1A9A1B64 /* UIEdgeInsets+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Utils.swift"; sourceTree = "<group>"; };
 		62F1B1D97C760AD62E5A49983D4BDFA9 /* Pods-SwiftEntryKitTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftEntryKitTests-frameworks.sh"; sourceTree = "<group>"; };
 		659C18D29D4B9D963A2AD7360AAACC30 /* Pods-SwiftEntryKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftEntryKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		66004CB1A7C8521F57255F1B7730899A /* EKAttributes+HapticFeedback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "EKAttributes+HapticFeedback.swift"; sourceTree = "<group>"; };
-		69166F1608F9AA42629A07B40644DABE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		69166F1608F9AA42629A07B40644DABE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		6A4247B3AA881E1167ACCB52765B83A7 /* UIViewArray+QuickLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewArray+QuickLayout.swift"; sourceTree = "<group>"; };
 		6BB26FC300594F35C87C818608EF5E97 /* UIApplication+EKAppearance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIApplication+EKAppearance.swift"; sourceTree = "<group>"; };
 		6D2BFDAF20FE3929989E2CF9DAD607D1 /* EKWindowProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKWindowProvider.swift; sourceTree = "<group>"; };
@@ -154,13 +154,13 @@
 		825DCCAAF219130678137286F5E77C47 /* Pods-SwiftEntryKitDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftEntryKitDemo-frameworks.sh"; sourceTree = "<group>"; };
 		83207A837E6FC691BF314B50D355DDFE /* EKProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKProperty.swift; sourceTree = "<group>"; };
 		85B4E31BFAD0BE2F1AB2D9819C94CD5E /* EKStyleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKStyleView.swift; sourceTree = "<group>"; };
-		8B2A180E1625D3725386A67CD04E058A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8B2A180E1625D3725386A67CD04E058A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		8F3A1E7AE5BF115E0441ACA73F5F7777 /* EKNotificationMessageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKNotificationMessageView.swift; sourceTree = "<group>"; };
 		90A1415978984FF3FBA4CA78A2CA9579 /* SwiftEntryKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftEntryKit.swift; path = Source/SwiftEntryKit.swift; sourceTree = "<group>"; };
 		9593CFAEB0028E56754D269C799C66B0 /* Pods-SwiftEntryKitDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftEntryKitDemo-dummy.m"; sourceTree = "<group>"; };
 		9707445CA8C13F503F9479C5832BD05F /* EKAccessoryNoteMessageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKAccessoryNoteMessageView.swift; sourceTree = "<group>"; };
 		9D047A81C3FC1342E72510A84B68A74F /* EKRatingSymbolView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKRatingSymbolView.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A04A38B59673DEC84C7286AC1A5DD82E /* Pods-SwiftEntryKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftEntryKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		A0FB49BE7E5EC403FAB589B332B94BC7 /* EKAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EKAttributes.swift; sourceTree = "<group>"; };
 		A14EAEBB9BEC7C4A28F157DA31131232 /* Pods-SwiftEntryKitDemo */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SwiftEntryKitDemo"; path = Pods_SwiftEntryKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +290,7 @@
 				F21EB7775F046AEBAEE59B3624247597 /* EKTextField.swift */,
 				C28803CAE40E0E4F5C7C4A73D5C25854 /* EntryAppearanceDescriptor.swift */,
 			);
+			name = MessagesUtils;
 			path = MessagesUtils;
 			sourceTree = "<group>";
 		};
@@ -331,6 +332,7 @@
 				57B80D470201DD94A4BB69F5CBA14801 /* EKProcessingNoteMessageView.swift */,
 				D5391C6DE6C291F263A187748B4AA74A /* EKXStatusBarMessageView.swift */,
 			);
+			name = Notes;
 			path = Notes;
 			sourceTree = "<group>";
 		};
@@ -418,6 +420,7 @@
 				BF6ABEFB7A51C8BE46A08DCC9EFE4253 /* EKAttributes+Validations.swift */,
 				7ADA3155CD7753D217158CC88DA0F1BD /* EKAttributes+WindowLevel.swift */,
 			);
+			name = EntryAttributes;
 			path = EntryAttributes;
 			sourceTree = "<group>";
 		};
@@ -446,6 +449,7 @@
 				55CA1FA254E03C8A738B1A1DC1A1E9C6 /* UIView+QuickLayout.swift */,
 				6A4247B3AA881E1167ACCB52765B83A7 /* UIViewArray+QuickLayout.swift */,
 			);
+			name = QuickLayout;
 			path = QuickLayout;
 			sourceTree = "<group>";
 		};
@@ -1008,7 +1012,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
